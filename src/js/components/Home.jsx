@@ -74,37 +74,39 @@ const Home = () => {
     setNewTask("");
   }
 
-  const getTasks = () => {
-    fetch(url + "/users/sean-hammond")
-      .then((resp) => {
-        return resp.json();
-      })
-      .then((data) => {
-        setTasks(data.todos);
-      });
+  const getTasks = async () => {
+    const response = await fetch(url + "/users/sean-hammond");
+    if (!response.ok) {
+      console.log("Repsonse is not ok", response.status, response.statusText);
+      return;
+    }
+    const data = await response.json();
+    console.log(data.todos);
+    setTasks(data.todos);
+    return;
   };
 
-  const addTaskWithAPI = (label) => {
-    setNewTask("");
-    let options = {
+  const addTaskWithAPI = async (label) => {
+    if (newTask.trim() == "") {
+      return;
+    }
+    const response = await fetch(url + "/todos/sean-hammond", {
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         label: label,
         is_done: false,
       }),
-    };
-    fetch(url + "/todos/sean-hammond", options)
-      .then((resp) => {
-        console.log("response: ", resp);
-        return resp.json();
-      })
-      .then((data) => {
-        console.log("Create user data: ", data);
-        getTasks();
-      });
+    });
+    if (!response.ok) {
+      console.log("Response is not ok", response.status, response.statusText);
+      return;
+    }
+    const data = await response.json();
+    getTasks();
+    return data;
   };
 
   useEffect(
@@ -148,21 +150,13 @@ const Home = () => {
           }
         }
         onKeyDown={(event) => {
-          // Add typed task to list if enter key pressed
           if (event.key == "Enter") {
             addTask();
             addTaskWithAPI(newTask);
           }
         }}
       />
-      <button
-        onClick={
-          // Add typed task to list if add button clicked
-          () => whenSaveBtnClicked()
-        }
-      >
-        Save task
-      </button>
+      <button onClick={() => whenSaveBtnClicked()}>Save task</button>
       <ul>
         {
           // Print each task as a li
