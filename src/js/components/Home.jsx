@@ -198,7 +198,8 @@ const Home = () => {
       </ul>
       <footer>
         <p>
-          <strong>Created by Sean Hammond</strong>
+          <strong>Created by Sean Hammond</strong> |{" "}
+          <a href="https://github.com/Sean-Hammond">GitHub</a>
         </p>
         <p>
           Mentors: Ryan Castanier, Alex Ayala-Palacin, Thomas Brito-Bronfield
