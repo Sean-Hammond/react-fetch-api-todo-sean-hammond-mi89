@@ -50,7 +50,7 @@ const getAllUsers = () => {
       (resp) => {
         // console.log("get all users - response:", resp.json());
         return resp.json();
-      }
+      },
     )
     // Final result of the request
     .then((data) => {
@@ -64,13 +64,12 @@ const Home = () => {
   // New task is empty string until user types and submits it to the tasks array
   const [newTask, setNewTask] = useState("");
 
-  // The array of tasks
   const [tasks, setTasks] = useState(["Example task"]);
 
   // Adds the user's typed task to the array of tasks
   function addTask() {
     if (newTask.trim() !== "") {
-      setTasks([...tasks, newTask + " ".repeat(tasks.length)]); // Each task has unique number of spaces. Clever way I came up with to ensure duplicates are not deleted.
+      setTasks([...tasks, newTask]);
     }
     setNewTask("");
   }
@@ -114,7 +113,7 @@ const Home = () => {
       createUser();
       getTasks();
     },
-    []
+    [],
   );
 
   function whenSaveBtnClicked() {
