@@ -2,20 +2,27 @@ import React, { useState, useEffect } from "react";
 
 const url = "https://playground.4geeks.com/todo";
 
-const createUser = () => {
-  const options = {
+const createUser = async () => {
+  const response = await fetch(url + "/users/sean-hammond", {
     method: "POST",
     headers: {
-      "content-type": "application/json",
-      body: JSON.stringify({
-        name: "sean-hammond",
-        id: 0,
-      }),
+      "Content-Type": "application/json",
     },
-  };
-  fetch(url + "/users/sean-hammond", options)
-    .then((r) => r.json())
-    .then((d) => console.log("created user data:", d));
+    body: JSON.stringify({
+      name: "sean-hammond",
+      id: 0,
+    }),
+  });
+  if (!response.ok) {
+    console.log(
+      "Creating user - response is not ok:",
+      response.status,
+      response.statusText,
+    );
+    return;
+  }
+  const data = await response.json();
+  return data;
 };
 
 const deleteTaskWithAPI = (taskId) => {
@@ -140,7 +147,7 @@ const Home = () => {
       <ul>
         {tasks.map((item, index) => {
           return (
-            <li key={index + "task"}>
+            <li key={item.id}>
               {item.label}
               <button
                 onClick={() => {
