@@ -52,8 +52,8 @@ const deleteAllTasksWithAPI = () => {
 const Home = () => {
   // New task is empty string until user types and submits it to the tasks array
   const [newTask, setNewTask] = useState("");
-
   const [tasks, setTasks] = useState(["Example task"]);
+  const [user, setUser] = useState({ name: "Sean", username: "sean-hammond" });
 
   // Adds the user's typed task to the array of tasks
   function addTask() {
@@ -125,6 +125,12 @@ const Home = () => {
         closed. TASK LIST MAY RESET OVERNIGHT. The list should support up to{" "}
         {maxIdNumberOfTasks} tasks.
       </p>
+      <label for="select-user">Change user:</label>
+      <select name="users" id="select-user">
+        <option value={user.username}>{user.name}</option>
+        <option value="random-user-123">User123</option>
+      </select>
+      <br />
       <input
         value={newTask}
         type="text"
