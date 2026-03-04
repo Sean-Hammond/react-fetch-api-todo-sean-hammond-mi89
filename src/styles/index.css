@@ -1,6 +1,6 @@
 body {
   background-color: lightcyan;
-  padding: 20px;
+  padding: 1.5rem;
 }
 
 h1 {
@@ -13,7 +13,7 @@ h2 {
   color: darkgreen;
   font-size: 12pt;
   font-weight: bold;
-  margin-top: 50px;
+  margin-top: 3rem;
 }
 
 input {
@@ -23,7 +23,7 @@ input {
 
 button {
   background-color: rgb(8, 231, 8);
-  border-radius: 4px;
+  border-radius: 0.25rem;
   font-weight: 500;
 }
 
@@ -38,7 +38,7 @@ li {
 ul button {
   background-color: lightpink;
   font-size: 10pt;
-  margin-top: 10px;
+  margin-top: 0.75rem;
 }
 
 li button {
@@ -47,7 +47,7 @@ li button {
   color: gray;
   font-size: 0.75rem;
   font-weight: bold;
-  margin-left: 10px;
+  margin-left: 0.75rem;
 }
 
 li button:hover {
@@ -63,8 +63,8 @@ li button:hover {
 footer {
   background-color: aliceblue;
   font-size: 10pt;
-  margin-top: 20px;
-  padding: 7px;
+  margin-top: 1.5rem;
+  padding: 0.5rem;
   text-align: center;
 }
 
