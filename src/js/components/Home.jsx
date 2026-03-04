@@ -2,26 +2,20 @@ import React, { useState, useEffect } from "react";
 
 const url = "https://playground.4geeks.com/todo";
 const maxIdNumberOfTasks = 200;
-const users = [
-  { name: "Sean", username: "sean-hammond" },
-  { name: "User123", username: "user-123" },
-  { name: "User456", username: "user-456" },
-];
 
 const Home = () => {
   // New task is empty string until user types and submits it to the tasks array
   const [newTask, setNewTask] = useState("");
   const [tasks, setTasks] = useState(["Example task"]);
-  const [user, setUser] = useState({ name: "Sean", username: "sean-hammond" });
 
   const createUser = async () => {
-    const response = await fetch(url + "/users/" + user.username, {
+    const response = await fetch(url + "/users/sean-hammond", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: user.username,
+        name: "sean-hammond",
         id: 0,
       }),
     });
@@ -68,7 +62,7 @@ const Home = () => {
   }
 
   const getTasks = async () => {
-    const response = await fetch(url + "/users/" + user.username);
+    const response = await fetch(url + "/users/sean-hammond");
     if (!response.ok) {
       console.log("Repsonse is not ok", response.status, response.statusText);
       return;
@@ -83,7 +77,7 @@ const Home = () => {
     if (newTask.trim() == "") {
       return;
     }
-    const response = await fetch(url + "/todos/" + user.username, {
+    const response = await fetch(url + "/todos/sean-hammond", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -129,24 +123,6 @@ const Home = () => {
         closed. TASK LIST MAY RESET OVERNIGHT. The list should support up to{" "}
         {maxIdNumberOfTasks} tasks.
       </p>
-      <label htmlFor="select-user">Change user:</label>
-      <select
-        name="users"
-        id="select-user"
-        value={user}
-        onChange={(e) => {
-          setUser(e.target.value);
-        }}
-      >
-        {users.map((user, index) => {
-          return (
-            <option key={user.username} value={user.username}>
-              {user.name}
-            </option>
-          );
-        })}
-      </select>
-      <br />
       <input
         value={newTask}
         type="text"
