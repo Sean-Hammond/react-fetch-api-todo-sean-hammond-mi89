@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const url = "https://playground.4geeks.com/todo";
+const maxIdNumberOfTasks = 200;
 
 const createUser = async () => {
   const response = await fetch(url + "/users/sean-hammond", {
@@ -34,8 +35,6 @@ const deleteTaskWithAPI = (taskId) => {
     .then((response) => response.json())
     .then((data) => console.log("Deleted tasks: ", data));
 };
-
-const maxIdNumberOfTasks = 200;
 
 const deleteAllTasksWithAPI = () => {
   for (let i = 0; i < maxIdNumberOfTasks; i++) {
